@@ -76,12 +76,10 @@ describe('CronometroComponent', () => {
     service.iniciar();
     fixture.detectChanges();
     
-    // Esperar un poco para que el tiempo transcurra
     setTimeout(() => {
       service.pausar();
       fixture.detectChanges();
       const button = fixture.nativeElement.querySelector('.btn-iniciar');
-      // Si hay tiempo transcurrido, debería mostrar "Continuar"
       const tiempoTranscurrido = service.tiempoActual();
       if (tiempoTranscurrido > 0) {
         expect(button?.textContent?.trim()).toBe('Continuar');
@@ -94,22 +92,18 @@ describe('CronometroComponent', () => {
     service.iniciar();
     fixture.detectChanges();
     
-    // Esperar un poco para que el tiempo transcurra
     setTimeout(() => {
       service.pausar();
       fixture.detectChanges();
       const tiempoDespuesDeDetener = service.tiempoActual();
       
-      // Verificar que el tiempo se mantiene
       expect(tiempoDespuesDeDetener).toBeGreaterThan(0);
       
-      // Continuar
       service.iniciar();
       fixture.detectChanges();
       
       setTimeout(() => {
         const tiempoDespuesDeContinuar = service.tiempoActual();
-        // El tiempo debería seguir aumentando desde donde se detuvo
         expect(tiempoDespuesDeContinuar).toBeGreaterThanOrEqual(tiempoDespuesDeDetener);
         service.pausar();
         done();
