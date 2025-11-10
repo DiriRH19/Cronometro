@@ -1,0 +1,32 @@
+<div class="cronometro-container">
+  <div class="cronometro-display">
+    <div class="tiempo">{{ tiempoFormateado() }}</div>
+    <div class="estado" [class.en-ejecucion]="enEjecucion()">
+      {{ enEjecucion() ? 'En ejecución' : 'Detenido' }}
+    </div>
+  </div>
+  
+  <div class="cronometro-controls">
+    <button 
+      type="button" 
+      class="btn btn-iniciar" 
+      (click)="iniciar()"
+      [disabled]="enEjecucion()">
+      {{ !enEjecucion() && tiempoActual() > 0 ? 'Continuar' : 'Iniciar' }}
+    </button>
+    <button 
+      type="button" 
+      class="btn btn-detener" 
+      (click)="detener()"
+      [disabled]="!enEjecucion()">
+      Detener
+    </button>
+    <button 
+      type="button" 
+      class="btn btn-reiniciar" 
+      (click)="reiniciar()">
+      Reiniciar
+    </button>
+  </div>
+</div>
+
